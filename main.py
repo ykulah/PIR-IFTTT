@@ -13,7 +13,7 @@ last_motion_time = 0
 
 
 def send_IFTTT_Request(key):
-	url = 'https://maker.ifttt.com/trigger/pir-motion-detect/with/key/HFrnEc8D1uPgrUR1mqhzI' # Set destination URL here
+	url = 'https://maker.ifttt.com/trigger/pir-motion-detect/with/key/<yourIFTTTMakerKey>' # Set destination URL here
 
 	r = requests.get(url)	
 	print(r.status_code)
