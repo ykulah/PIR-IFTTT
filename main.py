@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time as t
-
+import keys as k
 import requests
 
 GPIO.setmode(GPIO.BCM)
@@ -13,7 +13,7 @@ last_motion_time = 0
 
 
 def send_IFTTT_Request(key):
-	url = 'https://maker.ifttt.com/trigger/pir-motion-detect/with/key/<yourIFTTTMakerKey>' # Set destination URL here
+	url = 'https://maker.ifttt.com/trigger/pir-motion-detect/with/key/' + key
 
 	r = requests.get(url)	
 	print(r.status_code)
@@ -25,10 +25,10 @@ print 'Started.'
 while True:
 	if GPIO.input(4):
 		last_motion_time = t.time()
-		if (req_send == False and t.localtime().tm_hour > 7 and t.localtime.tm_hour < 8):
+		if (req_send == False and t.localtime().tm_hour >= 7 and t.localtime.tm_hour < 8):
 			req_send = True
 			#send IFTTT
-			send_IFTTT_Request('asd')
+			send_IFTTT_Request(k.IFTTT)
 			print 'Request sent'
 
 	if req_send == True:
